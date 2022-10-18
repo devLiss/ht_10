@@ -5,8 +5,8 @@ export const emailAdapter = {
     async send(user:any,subject:string, message:string) {
         let transporter = nodemailer.createTransport({
             //service: "gmail",
-            //host:"smtp.yandex.ru",
-            host:"smtp.mail.ru",
+            host:"smtp.yandex.ru",
+            //host:"smtp.mail.ru",
             port: 465,
             secure: true,
             /*host:"imap.mail.ru",

@@ -22,6 +22,7 @@ export const authService = {
 
     async sendRecoveryCode(email:string){
         let user = await userRepo.getByEmail(email);
+        console.log(email);
         console.log("Recovery Code")
         if(!user){
             console.log("User not found")
