@@ -46,6 +46,7 @@ export const authService = {
         const passwordData = await userService.generatePasswordHash(newPassword);
 
         await userRepo.confirmPassword(user.id,passwordData)
+        return true
     },
     async resendConfirmCode(email:string){
         let user = await userRepo.getByEmail(email);
