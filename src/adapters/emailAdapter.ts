@@ -27,7 +27,6 @@ export const emailAdapter = {
                 subject: subject,
                 html: message
             })
-            console.log(result)
             return result
         }catch(e){
             console.log(e)
