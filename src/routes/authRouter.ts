@@ -45,7 +45,7 @@ authRouter.post('/login', body('login').trim().isLength({min:1}),body('password'
     })
 })
 
-authRouter.post('/password-recovery',responseCountMiddleware,body('email').trim().isEmail().isLength({min:1}),inputValidationMiddleware, async (req:Request, res:Response)=>{
+authRouter.post('/password-recovery',responseCountMiddleware,/*body('email').trim().isEmail().isLength({min:1}),inputValidationMiddleware,*/ async (req:Request, res:Response)=>{
     console.log(await authService.sendRecoveryCode(req.body.email));
     res.sendStatus(204)
 })
