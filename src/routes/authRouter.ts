@@ -45,7 +45,7 @@ authRouter.post('/login', body('login').trim().isLength({min:1}),body('password'
     })
 })
 
-authRouter.post('/password-recovery',responseCountMiddleware,/*body('email').trim().isLength({min:1}),inputValidationMiddleware,*/ async (req:Request, res:Response)=>{
+authRouter.post('/password-recovery',body('email').trim().isLength({min:1}),inputValidationMiddleware,responseCountMiddleware, async (req:Request, res:Response)=>{
     console.log("PASSWORD-RECOVERY = "+req.body.email)
     if(!req.body.email){
         console.log("email is undefined")
@@ -59,7 +59,10 @@ authRouter.post('/new-password',responseCountMiddleware,async (req:Request, res:
 
     const confirmation = await authService.confirmPassword(req.body.newPassword,req.body.recoveryCode)
     if(!confirmation){
-        res.sendStatus(400)
+        res.status(400).send({
+            errorsMessages: [
+                { message: "Некорректный recoveryCode", field: "recoveryCode" }]
+        })
         return
     }
     res.sendStatus(204)
