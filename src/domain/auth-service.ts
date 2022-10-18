@@ -34,8 +34,10 @@ export const authService = {
             expirationDate:add(new Date(), {hours:1, minutes:3}),
             isConfirmed: false
         }
+        console.log(recoveryCode)
         const updatedUser = await userRepo.createRecoveryData(user.id, recoveryData)
-        const result = await emailManager.sendRecoveryCode(updatedUser)
+        console.log(updatedUser.value)
+        const result = await emailManager.sendRecoveryCode(updatedUser.value)
         return result
     },
     async confirmPassword(newPassword:string, recoveryCode:string){
@@ -44,7 +46,7 @@ export const authService = {
         if(user.recoveryData.isConfirmed) {return false}
 
         const passwordData = await userService.generatePasswordHash(newPassword);
-
+        console.log(user)
         await userRepo.confirmPassword(user.id,passwordData)
         return true
     },

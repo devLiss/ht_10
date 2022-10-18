@@ -14,7 +14,7 @@ export const emailManager = {
     },
     async sendRecoveryCode(user:any){
 
-        const subject = "Регистрация";
+        const subject = "Восстановление пароля";
         const message = "<h1>Password recovery</h1>\n" +
             "       <p>To finish password recovery please follow the link below:\n" +
             "          <a href='https://somesite.com/password-recovery?recoveryCode="+user.recoveryData.recoveryCode+"'>recovery password</a>\n" +

@@ -46,16 +46,16 @@ authRouter.post('/login', body('login').trim().isLength({min:1}),body('password'
 })
 
 authRouter.post('/password-recovery',responseCountMiddleware,async (req:Request, res:Response)=>{
-    //await authService.sendRecoveryCode(req.body.email);
+    console.log(await authService.sendRecoveryCode(req.body.email));
     res.sendStatus(204)
 })
 authRouter.post('/new-password',responseCountMiddleware,async (req:Request, res:Response)=>{
 
-    /*const confirmation = await authService.confirmPassword(req.body.newPassword,req.body.recoveryCode)
+    const confirmation = await authService.confirmPassword(req.body.newPassword,req.body.recoveryCode)
     if(!confirmation){
         res.sendStatus(400)
         return
-    }*/
+    }
     res.sendStatus(204)
 })
 
