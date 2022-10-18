@@ -45,7 +45,12 @@ authRouter.post('/login', body('login').trim().isLength({min:1}),body('password'
     })
 })
 
-authRouter.post('/password-recovery',responseCountMiddleware,body('email').trim().isLength({min:1}),inputValidationMiddleware, async (req:Request, res:Response)=>{
+authRouter.post('/password-recovery',responseCountMiddleware,/*body('email').trim().isLength({min:1}),inputValidationMiddleware,*/ async (req:Request, res:Response)=>{
+    if(!req.body.email){
+        console.log("Email is undefined!")
+        res.sendStatus(400)
+        return
+    }
     console.log(await authService.sendRecoveryCode(req.body.email));
     res.sendStatus(204)
 })
