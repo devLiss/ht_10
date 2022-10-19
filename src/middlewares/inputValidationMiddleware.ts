@@ -18,3 +18,12 @@ export const inputValidationMiddleware = (req:Request, res:Response, next:NextFu
     }
     next();
 }
+
+export const inputValidationMiddlewareV2 = (req:Request, res:Response, next:NextFunction) =>{
+    const errors = myValidationResult(req)
+    if (!errors.isEmpty()) {
+        res.status(406).json({ errorsMessages: errors.array({onlyFirstError:true}) });
+        return;
+    }
+    next();
+}

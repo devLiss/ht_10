@@ -7,7 +7,7 @@ import {
     loginValidator,
     passwordValidator
 } from "../middlewares/userMiddleware";
-import {inputValidationMiddleware} from "../middlewares/inputValidationMiddleware";
+import {inputValidationMiddleware, inputValidationMiddlewareV2} from "../middlewares/inputValidationMiddleware";
 import {body} from "express-validator";
 import {jwtService} from "../application/jwt-service";
 import {authMiddleware} from "../middlewares/authMiddleware";
@@ -21,7 +21,7 @@ import {responseCountMiddleware} from "../middlewares/responseCountMiddleware";
 export const authRouter = Router({})
 
 
-authRouter.post('/login', body('login').trim().isLength({min:1}),body('password').trim().isLength({min:1}) , inputValidationMiddleware, responseCountMiddleware, async (req:Request, res:Response)=>{
+authRouter.post('/login', body('login').trim().isLength({min:1}),body('password').trim().isLength({min:1}) , inputValidationMiddlewareV2, responseCountMiddleware, async (req:Request, res:Response)=>{
     const user = await userService.checkCredentials(req.body.login, req.body.password)
     if(!user){
         res.sendStatus(401)
