@@ -48,6 +48,7 @@ export const authService = {
 
         const passwordData = await userService.generatePasswordHash(newPassword);
         console.log(user)
+        console.log(passwordData)
         await userRepo.confirmPassword(user.id,passwordData)
         return true
     },
