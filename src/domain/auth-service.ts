@@ -37,7 +37,7 @@ export const authService = {
             isConfirmed: false
         }
         console.log(recoveryCode)
-        const updatedUser = await userRepo.createRecoveryData(user.id, recoveryData)
+        const updatedUser = await userRepo.createRecoveryData(user._id, recoveryData)
         console.log(updatedUser.value)
         const result = await emailManager.sendRecoveryCode(updatedUser.value)
         return result
