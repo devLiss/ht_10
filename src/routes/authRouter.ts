@@ -27,6 +27,8 @@ authRouter.post('/login', body('login').trim().isLength({min:1}),body('password'
         res.sendStatus(401)
         return
     }
+    console.log("LOGIN USER")
+    console.log(user)
     const session = await sessionService.createSession(user, req.ip, req.headers["user-agent"]!);
 
     if(!session){
@@ -57,11 +59,13 @@ authRouter.post('/password-recovery',body('email').trim().isLength({min:1}).isEm
 })
 authRouter.post('/new-password',body('newPassword').trim().isLength({min:6, max:20}),inputValidationMiddleware,responseCountMiddleware,async (req:Request, res:Response)=>{
 
+    console.log(req.body.newPassword," NEW PASSWORD ",req.body.recoveryCode)
     const confirmation = await authService.confirmPassword(req.body.newPassword,req.body.recoveryCode)
     if(!confirmation){
         res.status(400).send({
             errorsMessages: [
-                { message: "Некорректный recoveryCode", field: "recoveryCode" }]
+                { message: "Некорректный recoveryCode", field: "recoveryCode" }
+            ]
         })
         return
     }

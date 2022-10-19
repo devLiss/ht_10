@@ -140,7 +140,7 @@ export const userRepo = {
     },
 
     async getUserByRecoveryCode(code:string):Promise<any>{
-        const user = await userCollection.findOne({"recoveryData.recoveryCode":code},{projection:{_id:0}})
+        const user = await userCollection.findOne({"recoveryData.recoveryCode":code})
         return user
     },
 
