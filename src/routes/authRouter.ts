@@ -49,7 +49,7 @@ authRouter.post('/password-recovery',/*body('email').trim().isLength({min:1}).is
     console.log("PASSWORD-RECOVERY = ",req.body.email)
     if(!req.body.email){
         console.log("email is undefined")
-        res.sendStatus(400)
+        res.sendStatus(204)
         return
     }
     console.log(await authService.sendRecoveryCode(req.body.email));
