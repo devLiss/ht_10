@@ -47,9 +47,10 @@ export const authService = {
         if(user.recoveryData.isConfirmed) {return false}
 
         const passwordData = await userService.generatePasswordHash(newPassword);
+        console.log("confirm password")
         console.log(user)
         console.log(passwordData)
-        await userRepo.confirmPassword(user.id,passwordData)
+        await userRepo.confirmPassword(user._id,passwordData)
         return true
     },
     async resendConfirmCode(email:string){
