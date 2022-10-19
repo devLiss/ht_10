@@ -38,8 +38,7 @@ export const authService = {
         }
         console.log(recoveryCode)
         const updatedUser = await userRepo.createRecoveryData(user._id, recoveryData)
-        console.log(updatedUser.value)
-        const result = await emailManager.sendRecoveryCode(updatedUser.value)
+        const result = await emailManager.sendRecoveryCode(updatedUser)
         return result
     },
     async confirmPassword(newPassword:string, recoveryCode:string){

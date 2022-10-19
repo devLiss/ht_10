@@ -123,9 +123,10 @@ export const userRepo = {
     },
 
     async createRecoveryData(userId:ObjectId, recovery:{recoveryCode:string,expirationDate:Date,isConfirmed:boolean}){
-      const user =  await userCollection.findOneAndUpdate({_id:userId},{$set:{recoveryData:recovery}})
-        console.log(user)
-        return user
+      const user =  await userCollection.updateOne({_id:userId},{$set:{recoveryData:recovery}})
+        const updatedUser = await userCollection.findOne({_id:userId})
+        console.log(updatedUser)
+        return updatedUser
     },
     async confirmPassword(userId:string, passwordData:{passwordSalt:string,passwordHash:string}){
         const user =  await userCollection.findOneAndUpdate(
